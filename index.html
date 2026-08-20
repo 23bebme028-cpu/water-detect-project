@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JalSaarthi AI - multilingual government virtual assistant prototype for SIH">
+  <title>JalSaarthi AI | Government Virtual Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">💧</span><div><strong>JalSaarthi AI</strong><small>SIH Virtual Assistant Prototype</small></div></div>
+  <div class="top-actions">
+    <button id="privacyBtn" class="ghost">🔒 Privacy</button>
+    <button id="clearBtn" class="ghost danger">Clear local data</button>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <span class="pill">AI GOVERNMENT SERVICE ASSISTANT</span>
+      <h1>Turn a citizen's message into an actionable service request.</h1>
+      <p>Multilingual-ready conversational interface with local privacy-first demo storage, evidence capture and an officer workflow.</p>
+    </div>
+    <div class="hero-card">
+      <div class="stat"><b id="requestCount">0</b><span>Local requests</span></div>
+      <div class="stat"><b id="privacyStatus">ON</b><span>Privacy mode</span></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel chat-panel">
+      <div class="panel-head"><div><h2>Citizen Assistant</h2><span class="muted">Demo mode • no server transmission</span></div><span class="status-dot">● Online</span></div>
+      <div id="chat" class="chat" aria-live="polite"></div>
+      <div class="quick">
+        <button data-msg="I want to report a water supply problem">Water problem</button>
+        <button data-msg="How do I track my complaint?">Track request</button>
+        <button data-msg="I need help with a government service">Government service</button>
+      </div>
+      <form id="chatForm" class="composer">
+        <input id="message" autocomplete="off" placeholder="Type your request..." aria-label="Message">
+        <button type="button" id="micBtn" title="Voice input">🎙️</button>
+        <button type="submit" class="primary">Send</button>
+      </form>
+      <div class="composer-note">Prototype responses are rule-based. Connect a verified AI/RAG backend before production use.</div>
+    </div>
+
+    <aside class="panel request-panel">
+      <div class="panel-head"><div><h2>Request Builder</h2><span class="muted">Minimal-data collection</span></div></div>
+      <form id="requestForm">
+        <label>Issue category
+          <select id="category">
+            <option>Water supply</option>
+            <option>Government service</option>
+            <option>Public infrastructure</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Description
+          <textarea id="description" rows="4" placeholder="Describe the issue"></textarea>
+        </label>
+        <label>Location
+          <input id="location" placeholder="Area / village / ward">
+        </label>
+        <label>Priority
+          <select id="priority"><option>Normal</option><option>High</option><option>Urgent</option></select>
+        </label>
+        <label>Evidence (optional)
+          <input id="evidence" type="file" accept="image/*">
+        </label>
+        <button class="primary full" type="submit">Create private demo request</button>
+      </form>
+      <div class="privacy-box">🔐 <b>Privacy-first demo:</b> requests are stored only in this browser using IndexedDB. Files are not uploaded to a server.</div>
+    </aside>
+  </section>
+
+  <section class="panel requests">
+    <div class="panel-head"><div><h2>Officer View</h2><span class="muted">Local prototype records</span></div><button id="exportBtn" class="ghost">Export JSON</button></div>
+    <div id="requestList" class="request-list"></div>
+  </section>
+
+  <section class="panel privacy" id="privacy">
+    <h2>Privacy & Data Protection</h2>
+    <div class="privacy-grid">
+      <div><h3>Data minimisation</h3><p>Collect only the information needed to process a request. Avoid Aadhaar numbers, passwords and unnecessary personal identifiers.</p></div>
+      <div><h3>Local-first prototype</h3><p>The GitHub Pages demo stores request records in IndexedDB on the user's device. No API or cloud upload is configured.</p></div>
+      <div><h3>Production protection</h3><p>For deployment with real citizens, use authenticated access, HTTPS, server-side authorization, database row-level security, audit logs, retention rules and encrypted storage.</p></div>
+      <div><h3>Consent & deletion</h3><p>Tell users what is collected, why it is needed and how long it is retained. Provide deletion/export controls where appropriate.</p></div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
